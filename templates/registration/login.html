@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+        <form method="post" action="{% url 'login' %}" class="form-signin">
+            {% csrf_token %}
+            <div class="form-outline mb-4">
+                <input type="text" id="id_username" name="username" class="form-control" />
+                <label class="form-label" for="id_username">User Name</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <input type="password" id="id_password" name="password" class="form-control" />
+                <label class="form-label" for="id_password">Password</label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+    </div>
+  </div>
+{% endblock %}

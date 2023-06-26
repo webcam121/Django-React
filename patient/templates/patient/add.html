@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}  
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="content">
+                <div class="container-fluid">
+                  {% if form.errors %}
+                  <div class="alert alert-danger" role="alert">
+                    {{ form.non_field_errors }}
+                    {% for field in form %}
+                      {% for error in field.errors %}
+                        {{ error }}
+                      {% endfor %}
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+            <div id="create-patient-form"></div>
+        </div>
+        
+    </div>
+    {{ hospital|json_script:'hospital-info' }}
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/csrftoken.js' %}" type="text/babel"></script>
+  <script src="{% static 'patient/addForm.js' %}" type="text/babel"></script>
+{% endblock %}

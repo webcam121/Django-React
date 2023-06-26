@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}  
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center mb-5">
+            <h2 class="heading-section">Patient List</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-primary mb-3" href="{% url 'add_patient' hospital_id %}" role="button">Create</a>
+            <div class="table-wrap">
+                <table class="table table-bordered table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Patient Name</th>
+                            <th>Phone Number</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for patient in patient_list %}
+                        <tr>
+                            <td scope="row">{{ forloop.counter }}</td>
+                            <td width="30%">{{ patient.first_name }} {{ patient.last_name }}</td>
+                            <td width="60%">{{ patient.phone_number }}</td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
